@@ -22,7 +22,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   async function (res) {
-    debugger
     // Do something with the response
     if (res.headers.jwt) {
       window.localStorage.setItem("userToken", res.headers.jwt);
