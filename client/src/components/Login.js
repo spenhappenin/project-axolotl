@@ -1,7 +1,8 @@
-import React, { useContext, useState, } from "react";
-import { useHistory, } from "react-router-dom";
+import React, { useContext, useState, } from 'react';
+import { useHistory, } from 'react-router-dom';
+import { Container, Form, } from 'semantic-ui-react';
 
-import { AuthContext, } from "../providers/AuthProvider";
+import { AuthContext, } from '../providers/AuthProvider';
 
 const Login = ({  }) => {
   const [email, setEmail] = useState('');
@@ -15,20 +16,26 @@ const Login = ({  }) => {
   };
 
   return (
-    <div>
+    <Container>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type='email' onChange={(e) => setEmail(e.target.value) } />
-        <br />
-        <br />
-        <label>Password</label>
-        <input type='password' onChange={(e) => setPassword(e.target.value)} />
-        <br />
-        <br />
-        <button>Login</button>
-      </form>
-    </div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Input
+          name="email"
+          label="Email"
+          type="email"
+          required
+          onChange={(e) => setEmail(e.target.value) }
+        />
+        <Form.Input
+          name="password"
+          label="Password"
+          type="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Form.Button type="submit">Login</Form.Button>
+      </Form>
+    </Container>
   );
 };
 

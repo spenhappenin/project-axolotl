@@ -33,30 +33,35 @@ const Registration = (props) => {
           label="First Name"
           type="text"
           value={firstName}
+          required
           onChange={(e, { value, }) => setFirstName(value)}
         />
         <Form.Input
           label="Last Name"
           type="text"
           value={lastName}
+          required
           onChange={(e, { value, }) => setLastName(value)}
         />
         <Form.Input
           label="Email"
           type="email"
           value={email}
+          required
           onChange={(e, { value, }) => setEmail(value)}
         />
         <Form.Input
           label="Password"
           type="password"
           value={password}
+          required
           onChange={(e, { value, }) => setPassword(value)}
         />
         <Form.Input
           label="Password Confirmation"
           type="password"
           value={passwordConfirmation}
+          required
           onChange={(e, { value, }) => setPasswordConfirmation(value)}
         />
         <Form.Button type="submit">Register</Form.Button>

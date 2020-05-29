@@ -6,7 +6,7 @@ import { Route, Switch, } from 'react-router-dom';
 import Home from './components/Home';
 import Pricing from './components/Pricing';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import NavbarContainer from './components/shared/NavbarContainer';
 import Registration from './components/Registration';
 import FetchUser from './components/FetchUser';
 import NotFound from './components/NotFound';
@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarContainer />
       <Container>
         <FetchUser>
           <Switch>
