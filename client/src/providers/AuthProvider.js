@@ -9,19 +9,32 @@ export const AuthProvider = ({ children, }) => {
   const [loading, setLoading] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
-  const registration = () => {
+  const registration = (user, push) => {
+    axios.post('/api/registration', { ...user })
+      .then( res => {
+        setUser(res.data);
+        authenticate(user, push);
+        push('/');
+      })
+      .catch( err => {
+        // TODO: Render flash
+      })
   };
 
   const authenticate = ({ email, password, }, push) => {
     setLoading(true);
-    axios.post("/api/authenticate", { email, password, })
+    axios.post('/api/authenticate', { email, password, })
       .then( res => {
         setLoading(false);
         setUser(res.data);
-        push("/");
+        setAuthenticated(true);
+        push('/');
       })
       .catch( err => {
-        debugger
+        // TODO: Render flash
+        setLoading(false);
+        setAuthenticated(false);
+        setUser(null);
       })
   };
 
