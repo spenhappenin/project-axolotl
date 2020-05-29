@@ -5,7 +5,7 @@ export const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
 export const AuthProvider = ({ children, }) => {
-  const [user, setUser] = useState({ name: "Spanky" });
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -42,6 +42,22 @@ export const AuthProvider = ({ children, }) => {
   };
 
   const validateToken = () => {
+    setLoading(true);
+    return new Promise( (resolve, reject) => {
+      axios.post("/api/validate_token")
+        .then( res => {
+          setLoading(false);
+          setAuthenticated(true);
+          setUser(res.data.data);
+          resolve(res);
+        })
+        .catch( err => {
+          setLoading(false);
+          setAuthenticated(false);
+          setUser(null);
+          reject(err);
+        })
+    });
   };
 
   return (

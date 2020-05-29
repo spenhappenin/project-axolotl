@@ -1,5 +1,5 @@
 class Api::AuthenticationController < ApiController
-  skip_before_action :authenticate_request
+  skip_before_action :authenticate_request, only: [:authenticate, :registration, :course_register_authenticate]
 
   def authenticate
     command = AuthenticateUser.call(params[:email], params[:password])
@@ -18,6 +18,10 @@ class Api::AuthenticationController < ApiController
     else
       # TODO: Error handling
     end
+  end
+
+  def validate_token
+    render json: @current_user
   end
 
   private
