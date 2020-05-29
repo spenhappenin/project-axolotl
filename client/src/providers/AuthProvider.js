@@ -39,6 +39,9 @@ export const AuthProvider = ({ children, }) => {
   };
 
   const logout = () => {
+    setLoading(true);
+    setUser(null);
+    window.localStorage.removeItem('userToken');
   };
 
   const validateToken = () => {

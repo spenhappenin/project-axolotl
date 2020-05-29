@@ -1,41 +1,58 @@
-import React from 'react';
+import React, { useContext, } from 'react';
 
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
 import { Menu, } from 'semantic-ui-react';
 
-const Navbar = () => (
-  <Menu>
-    <Link to="/">
-      <Menu.Item name="home">
-        LOGO
-      </Menu.Item>
-    </Link>
+import { AuthContext, } from '../providers/AuthProvider';
 
-    <Menu.Menu position="right">
+const Navbar = () => {
+  const { authenticated, logout, } = useContext(AuthContext);
+
+  return (
+    <Menu>
       <Link to="/">
         <Menu.Item name="home">
-          HOME
+          LOGO
         </Menu.Item>
       </Link>
-      <Link to="/pricing">
-        <Menu.Item name="pricing">
-          PRICING
-        </Menu.Item>
-      </Link>
-      <Link to="/trial">
-        <Menu.Item name="trial">
-          TRIAL
-        </Menu.Item>
-      </Link>
-      <Link to="/login">
-        <Menu.Item name="login" as={NavButton}>
-          LOGIN
-        </Menu.Item>
-      </Link>
-    </Menu.Menu>
-  </Menu>
-);
+
+      <Menu.Menu position="right">
+        <Link to="/">
+          <Menu.Item name="home">
+            HOME
+          </Menu.Item>
+        </Link>
+        <Link to="/pricing">
+          <Menu.Item name="pricing">
+            PRICING
+          </Menu.Item>
+        </Link>
+        {
+          authenticated ?
+          <>
+            <Menu.Item name="logout" onClick={logout}>
+              LOGOUT
+            </Menu.Item>
+          </>
+          :
+          <>
+            <Link to="/trial">
+              <Menu.Item name="trial">
+                TRIAL
+              </Menu.Item>
+            </Link>
+            <Link to="/login">
+              <Menu.Item name="login" as={NavButton}>
+                LOGIN
+              </Menu.Item>
+            </Link>
+          </>
+        }
+      </Menu.Menu>
+    </Menu>
+  );
+};
 
 const NavButton = styled.button`
 
