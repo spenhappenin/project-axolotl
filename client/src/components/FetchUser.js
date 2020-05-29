@@ -3,10 +3,10 @@ import { AuthContext, } from "../providers/AuthProvider";
 
 const FetchUser = ({ children, }) => {
   const [loaded, setLoaded] = useState(false);
-  const { validateToken, user, } = useContext(AuthContext);
+  const { validateToken, authenticated, } = useContext(AuthContext);
 
   useEffect(() => {
-    if (user) {
+    if (authenticated) {
       setLoaded(true);
     } else {
       validateToken()

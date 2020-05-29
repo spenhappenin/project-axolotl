@@ -38,10 +38,12 @@ export const AuthProvider = ({ children, }) => {
       })
   };
 
-  const logout = () => {
+  const logout = (push) => {
     setLoading(true);
     setUser(null);
+    setAuthenticated(false);
     window.localStorage.removeItem('userToken');
+    push('/login');
   };
 
   const validateToken = () => {
@@ -51,7 +53,7 @@ export const AuthProvider = ({ children, }) => {
         .then( res => {
           setLoading(false);
           setAuthenticated(true);
-          setUser(res.data.data);
+          setUser(res.data);
           resolve(res);
         })
         .catch( err => {

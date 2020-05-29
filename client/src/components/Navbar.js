@@ -3,11 +3,13 @@ import React, { useContext, } from 'react';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
 import { Menu, } from 'semantic-ui-react';
+import { useHistory, } from "react-router-dom";
 
 import { AuthContext, } from '../providers/AuthProvider';
 
 const Navbar = () => {
   const { authenticated, logout, } = useContext(AuthContext);
+  const history = useHistory();
 
   return (
     <Menu>
@@ -31,7 +33,7 @@ const Navbar = () => {
         {
           authenticated ?
           <>
-            <Menu.Item name="logout" onClick={logout}>
+            <Menu.Item name="logout" onClick={() => logout(history.push)}>
               LOGOUT
             </Menu.Item>
           </>

@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import { AuthProvider, } from "./providers/AuthProvider";
 import './index.css';
 import App from './App';
+import { BrowserRouter as Router, } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
