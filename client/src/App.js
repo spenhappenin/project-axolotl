@@ -6,7 +6,7 @@ import { Route, Switch, } from 'react-router-dom';
 import Home from './components/Home';
 import Pricing from './components/Pricing';
 import Login from './components/Login';
-import NavbarContainer from './components/shared/NavbarContainer';
+import Navbar from './components/shared/Navbar';
 import Registration from './components/Registration';
 import FetchUser from './components/FetchUser';
 import NotFound from './components/NotFound';
@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <>
-      <NavbarContainer />
+      <Navbar />
       <Container>
         <FetchUser>
           <Switch>
@@ -40,7 +40,7 @@ const App = () => {
             />
             <AuthRoute
               exact
-              path="/trial"
+              path="/register"
               component={Registration}
             />
             <Route

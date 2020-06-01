@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: project_hoatzin_development
+  database: project_axolotl_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: project_hoatzin_test
+  database: project_axolotl_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: project_hoatzin_production
-  username: project_hoatzin
-  password: <%= ENV['PROJECT_HOATZIN_DATABASE_PASSWORD'] %>
+  database: project_axolotl_production
+  username: project_axolotl
+  password: <%= ENV['PROJECT_AXOLOTL_DATABASE_PASSWORD'] %>

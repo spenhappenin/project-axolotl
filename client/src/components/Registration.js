@@ -28,6 +28,7 @@ const Registration = (props) => {
 
   return (
     <Container>
+      <h1>Register</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Input
           label="First Name"
