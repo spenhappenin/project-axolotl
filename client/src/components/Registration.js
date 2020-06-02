@@ -17,13 +17,17 @@ const Registration = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registration({
-      first_name: firstName,
-      last_name: lastName,
-      email,
-      password,
-      password_confirmation: passwordConfirmation
-    }, history.push);
+    if (password === passwordConfirmation)
+      registration({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
+      }, history.push);
+    else
+      // TODO: Render error and flash
+      console.log(false);
   };
 
   return (
@@ -56,6 +60,8 @@ const Registration = (props) => {
           type="password"
           value={password}
           required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
           onChange={(e, { value, }) => setPassword(value)}
         />
         <Form.Input
@@ -63,6 +69,8 @@ const Registration = (props) => {
           type="password"
           value={passwordConfirmation}
           required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
           onChange={(e, { value, }) => setPasswordConfirmation(value)}
         />
         <Form.Button type="submit">Register</Form.Button>
