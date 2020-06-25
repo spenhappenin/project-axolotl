@@ -4,6 +4,12 @@
 #                      api_authenticate POST   /api/authenticate(.:format)                                                              api/authentication#authenticate
 #                      api_registration POST   /api/registration(.:format)                                                              api/authentication#registration
 #                    api_validate_token POST   /api/validate_token(.:format)                                                            api/authentication#validate_token
+#                         api_companies GET    /api/companies(.:format)                                                                 api/companies#index
+#                                       POST   /api/companies(.:format)                                                                 api/companies#create
+#                           api_company GET    /api/companies/:id(.:format)                                                             api/companies#show
+#                                       PATCH  /api/companies/:id(.:format)                                                             api/companies#update
+#                                       PUT    /api/companies/:id(.:format)                                                             api/companies#update
+#                                       DELETE /api/companies/:id(.:format)                                                             api/companies#destroy
 #         rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                  action_mailbox/ingresses/postmark/inbound_emails#create
 #            rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                     action_mailbox/ingresses/relay/inbound_emails#create
 #         rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                  action_mailbox/ingresses/sendgrid/inbound_emails#create
@@ -25,8 +31,11 @@
 
 Rails.application.routes.draw do
   namespace :api do
+    # Authentication
     post 'authenticate', to: 'authentication#authenticate'
     post 'registration', to: 'authentication#registration'
     post 'validate_token', to: 'authentication#validate_token'
+
+    resources :companies
   end
 end

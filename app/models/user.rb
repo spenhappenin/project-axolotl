@@ -14,6 +14,9 @@
 class User < ApplicationRecord
   has_secure_password
 
+  # Associations
+  has_many :companies
+
   def password_check(password_confirmation)
     self.password == password_confirmation ? true : false
   end

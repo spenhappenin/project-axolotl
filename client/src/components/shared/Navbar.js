@@ -23,6 +23,11 @@ const Navbar = () => {
         {
           authenticated ?
             <>
+              <Link to="/companies">
+                <Menu.Item name="companies">
+                  Companies
+                </Menu.Item>
+              </Link>
               <Menu.Item name="logout" onClick={() => logout(history.push)}>
                 LOGOUT
               </Menu.Item>
