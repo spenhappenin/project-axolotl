@@ -1,11 +1,16 @@
 import React, { useEffect, useState, } from 'react';
 
 import axios from '../../utils/webRequests';
-import { useParams, } from 'react-router-dom';
+
+import CompanyForm from './CompanyForm';
+import { Button, Dropdown, Segment, } from 'semantic-ui-react';
+import { useHistory, useParams, } from 'react-router-dom';
 
 const Company = () => {
   const [company, setCompany] = useState({});
+  const [editing, setEditing] = useState(false);
   const { id, } = useParams();
+  const { push, } = useHistory();
 
   useEffect( () => {
     axios.get(`/api/companies/${id}`)
@@ -17,9 +22,62 @@ const Company = () => {
       })
   }, []);
 
+  const renderShow = () => (
+    <>
+      <br />
+      <br />
+      <img src={company.logo_url} alt={company.title} />
+      <h1>{ company.title }</h1>
+      <br />
+      <p><b>{ company.industry }</b></p>
+      <br />
+      <p>{ company.description }</p>
+      <br />
+    </>
+  );
+
+  const renderEdit = () => <CompanyForm company={company} setEditing={setEditing} setCompany={setCompany} />;
+
+  const onDelete = () => {
+    axios.delete(`/api/companies/${id}`)
+      .then( () => {
+        console.log('Deleted....');
+        push('/companies');
+      })
+      .catch( err => {
+        console.log(err);
+      })
+  };
+
   return (
     <div>
-      <h1>{ company.title }</h1>
+      <Button
+        color="blue"
+        onClick={() => push('/companies')}
+      >
+        All Companies
+      </Button>
+
+      <Dropdown icon="setting">
+        <Dropdown.Menu>
+          <Dropdown.Item text="edit" onClick={() => setEditing(true)} />
+          <Dropdown.Item text="delete" onClick={onDelete} />
+        </Dropdown.Menu>
+      </Dropdown>
+
+      { editing ? renderEdit() : renderShow() }
+
+      <Segment>
+        <h2>Applications</h2>
+      </Segment>
+      <br />
+      <Segment>
+        <h2>Contacts</h2>
+      </Segment>
+      <br />
+      <Segment>
+        <h2>Notes</h2>
+      </Segment>
     </div>
   );
 };

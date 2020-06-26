@@ -1,31 +1,55 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 
 import axios from '../../utils/webRequests';
 
-import { Form, } from 'semantic-ui-react';
+import { Button, Form, } from 'semantic-ui-react';
 import { useHistory, } from 'react-router-dom';
 
-const CompanyForm = () => {
+const CompanyForm = (props) => {
+  const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
   const [industry, setIndustry] = useState('');
   const { push, } = useHistory();
 
+  useEffect(() => {
+    if (props.company) {
+      const { id, title, description, logo_url, industry, } = props.company;
+      setId(id);
+      setTitle(title);
+      setDescription(description);
+      setLogoUrl(logo_url);
+      setIndustry(industry);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/companies', { title, description, logo_url: logoUrl, industry, })
-      .then( res => {
-        push(`/companies/${res.data.id}`);
-      })
-      .catch( err => {
-        console.log(err);
-      })
+    if (props.company) {
+      axios.put(`/api/companies/${id}`, { title, description, logo_url: logoUrl, industry, })
+        .then( res => {
+          props.setEditing(false);
+          props.setCompany(res.data);
+        })
+        .catch( err => {
+          console.log(err);
+        })
+    } else {
+      axios.post('/api/companies', { title, description, logo_url: logoUrl, industry, })
+        .then( res => {
+          push(`/companies/${res.data.id}`);
+        })
+        .catch( err => {
+          console.log(err);
+        })
+    }
   };
 
   return (
     <div>
-      <h1>New Company</h1>
+      <br />
+      { !props.company && <h1>New Company</h1> }
       <Form onSubmit={handleSubmit}>
         <Form.Input
           label="Title"
@@ -59,7 +83,8 @@ const CompanyForm = () => {
           value={industry}
           onChange={e => setIndustry(e.target.value)}
         />
-        <Form.Button>Submit</Form.Button>
+        <Form.Button type="submit">Submit</Form.Button>
+        { props.company && <Button onClick={() => props.setEditing(false)}>Cancel</Button> }
       </Form>
     </div>
   );
