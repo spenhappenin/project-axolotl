@@ -11,6 +11,10 @@ class Api::CompanyNotesController < ApiController
     end
   end
 
+  def destroy
+    @company.company_notes.find(params[:id]).destroy
+  end
+
   private
     def set_company
       @company = Company.find(params[:company_id])

@@ -2,7 +2,10 @@ import React, { useState, } from 'react';
 
 import { Button, Segment, } from 'semantic-ui-react';
 
+import Note from './Note';
 import NoteForm from './NoteForm';
+
+// TODO: Company Context? Avoid all the prop drilling
 
 const Notes = ({ company, notes, setCompany, }) => {
   const [showForm, setShowForm] = useState(false);
@@ -21,11 +24,8 @@ const Notes = ({ company, notes, setCompany, }) => {
       <br />
       <br />
       {
-        notes && notes.map( ({ body, id, title, }) => (
-          <div key={id}>
-            <p>{ body }</p>
-            <hr />
-          </div>
+        notes && notes.map( note => (
+          <Note key={note.id} { ...note } setCompany={setCompany} company={company} />
         ))
       }
     </Segment>
