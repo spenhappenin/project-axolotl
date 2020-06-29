@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     post 'registration', to: 'authentication#registration'
     post 'validate_token', to: 'authentication#validate_token'
 
-    resources :companies
+    resources :companies do
+      resources :company_notes, only: :create
+    end
   end
 end

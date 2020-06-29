@@ -3,6 +3,7 @@ import React, { useEffect, useState, } from 'react';
 import axios from '../../utils/webRequests';
 
 import CompanyForm from './CompanyForm';
+import Notes from './Notes';
 import { Button, Dropdown, Segment, } from 'semantic-ui-react';
 import { useHistory, useParams, } from 'react-router-dom';
 
@@ -39,14 +40,18 @@ const Company = () => {
   const renderEdit = () => <CompanyForm company={company} setEditing={setEditing} setCompany={setCompany} />;
 
   const onDelete = () => {
-    axios.delete(`/api/companies/${id}`)
-      .then( () => {
-        console.log('Deleted....');
-        push('/companies');
-      })
-      .catch( err => {
-        console.log(err);
-      })
+    const confirm = window.confirm('Are you sure you want to delete this company?');
+
+    if (confirm)
+      axios.delete(`/api/companies/${id}`)
+        .then( () => {
+          console.log('Deleted....');
+          push('/companies');
+        })
+        .catch( err => {
+          // TODO: Error handling
+          console.log(err);
+        })
   };
 
   return (
@@ -75,9 +80,12 @@ const Company = () => {
         <h2>Contacts</h2>
       </Segment>
       <br />
-      <Segment>
-        <h2>Notes</h2>
-      </Segment>
+      {/* TODO: Prop drilling here... better way? */}
+      <Notes
+        company={company}
+        notes={company.notes}
+        setCompany={setCompany}
+      />
     </div>
   );
 };

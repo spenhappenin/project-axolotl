@@ -6,7 +6,7 @@ class Api::CompaniesController < ApiController
   end
 
   def show
-    render json: @company
+    render json: @company.fetch_company_data
   end
 
   def create

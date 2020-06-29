@@ -13,5 +13,16 @@
 class Company < ApplicationRecord
   # Associations
   belongs_to :user
+  has_many :company_notes, dependent: :destroy
 
+  def fetch_company_data
+    return {
+      id: self.id,
+      title: self.title,
+      description: self.description,
+      logo_url: self.logo_url,
+      industry: self.industry,
+      notes: self.company_notes.order('created_at DESC')
+    }
+  end
 end

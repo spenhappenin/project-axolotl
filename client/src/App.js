@@ -68,6 +68,9 @@ const App = () => {
               />
             </Switch>
           </FetchUser>
+          <br />
+          <br />
+          <br />
         </Container>
       </Suspense>
     </>
