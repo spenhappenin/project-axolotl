@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 2020_07_01_180415) do
   end
 
   create_table "job_applications", force: :cascade do |t|
-    t.datetime "date_submitted"
+    t.date "date_submitted"
     t.string "position"
     t.integer "salary"
+    t.text "description"
     t.boolean "active", default: true
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
