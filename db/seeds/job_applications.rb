@@ -12,7 +12,7 @@ user.companies.each_with_index do |company, i|
       date_submitted: i == 0 ? Date.today - 230 : Date.today,
       description: 'Some description about the application',
       salary: [60000, 75000, 80000, 90000].sample,
-      active: i == 0 ? false : true,
+      status: i == 0 ? 'declined' : 'pending',
       company_id: company.id
     )
   end

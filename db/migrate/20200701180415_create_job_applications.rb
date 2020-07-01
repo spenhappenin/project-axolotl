@@ -5,7 +5,7 @@ class CreateJobApplications < ActiveRecord::Migration[6.0]
       t.string :position
       t.integer :salary
       t.text :description
-      t.boolean :active, default: true
+      t.string :status, default: 'pending'
       t.belongs_to :company, null: false, foreign_key: true
 
       t.timestamps

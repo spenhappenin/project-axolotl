@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_07_01_180415) do
     t.string "position"
     t.integer "salary"
     t.text "description"
-    t.boolean "active", default: true
+    t.string "status", default: "pending"
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

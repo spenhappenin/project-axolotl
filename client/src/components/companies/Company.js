@@ -3,7 +3,7 @@ import React, { useEffect, useState, } from 'react';
 import axios from '../../utils/webRequests';
 
 import CompanyForm from './CompanyForm';
-import Notes from './Notes';
+import Notes from './notes/Notes';
 import JobApplications from './job_applications/JobApplications';
 import { Button, Dropdown, Segment, } from 'semantic-ui-react';
 import { useHistory, useParams, } from 'react-router-dom';

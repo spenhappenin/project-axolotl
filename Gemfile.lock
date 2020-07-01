@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 7309c9d59f1f73e7875635c083f7d8958e0c9f3a
+  branch: master
+  specs:
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -163,6 +171,7 @@ DEPENDENCIES
   annotate
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
+  faker!
   jwt
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)

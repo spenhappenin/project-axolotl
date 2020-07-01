@@ -1,6 +1,6 @@
 import React, { useEffect, useState, } from 'react';
 
-import axios from '../../utils/webRequests';
+import axios from '../../../utils/webRequests';
 import { useParams, } from 'react-router-dom';
 
 import { Form, } from 'semantic-ui-react';

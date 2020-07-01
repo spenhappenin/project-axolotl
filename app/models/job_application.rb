@@ -15,4 +15,15 @@ class JobApplication < ApplicationRecord
   # Associations
   belongs_to :company
 
+  def render_app_data
+    return {
+      id: self.id,
+      position: self.position,
+      date_submitted: self.date_submitted,
+      description: self.description,
+      status: self.status,
+      company: Company.find(self.company_id)
+    }
+  end
+
 end

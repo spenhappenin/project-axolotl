@@ -3,7 +3,7 @@ import React, { useState, } from 'react';
 import { Dropdown, Icon, Segment, } from 'semantic-ui-react';
 import { useParams, } from 'react-router-dom';
 
-import axios from '../../utils/webRequests';
+import axios from '../../../utils/webRequests';
 import NoteForm from './NoteForm';
 
 const Note = ({ id, title, body, setCompany, company, setShowForm, }) => {
