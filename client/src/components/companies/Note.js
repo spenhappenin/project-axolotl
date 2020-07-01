@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, } from 'react';
 
 import { Button, } from 'semantic-ui-react';
 import { useParams, } from 'react-router-dom';
 
 import axios from '../../utils/webRequests';
+import NoteForm from './NoteForm';
 
-const Note = ({ id, title, body, setCompany, company, }) => {
+const Note = ({ id, title, body, setCompany, company, setShowForm, }) => {
   const { id: companyId, } = useParams();
+  const [editing, setEditing] = useState(false);
 
   const handleDelete = () => {
     const confirm = window.confirm('Are you sure you want to delete this note?');
@@ -25,11 +27,23 @@ const Note = ({ id, title, body, setCompany, company, }) => {
 
   return (
     <div>
-      <Button icon="pencil" />
+      <Button icon={editing ? 'cancel' : 'pencil'} onClick={() => setEditing(!editing)} />
       <Button icon="trash" color="red" onClick={handleDelete} />
-      { title && <h4>{ title }</h4> }
-      <p>{ body }</p>
-      <hr />
+      {
+        editing ?
+          <NoteForm
+            note={{ id, title, body, }}
+            setEditing={setEditing}
+            company={company}
+            setCompany={setCompany}
+          />
+        :
+        <div>
+          { title && <h4>{ title }</h4> }
+          <p>{ body }</p>
+          <hr />
+        </div>
+      }
     </div>
   );
 };

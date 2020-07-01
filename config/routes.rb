@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     post 'validate_token', to: 'authentication#validate_token'
 
     resources :companies do
-      resources :company_notes, only: [:create, :destroy]
+      resources :company_notes, except: [:index, :show]
     end
   end
 end

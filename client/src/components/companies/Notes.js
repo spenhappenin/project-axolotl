@@ -25,7 +25,13 @@ const Notes = ({ company, notes, setCompany, }) => {
       <br />
       {
         notes && notes.map( note => (
-          <Note key={note.id} { ...note } setCompany={setCompany} company={company} />
+          <Note
+            key={note.id}
+            { ...note }
+            setCompany={setCompany}
+            company={company}
+            setShowForm={setShowForm}
+          />
         ))
       }
     </Segment>
