@@ -1,6 +1,6 @@
 import React, { useState, } from 'react';
 
-import { Button, } from 'semantic-ui-react';
+import { Dropdown, Icon, Segment, } from 'semantic-ui-react';
 import { useParams, } from 'react-router-dom';
 
 import axios from '../../utils/webRequests';
@@ -26,9 +26,7 @@ const Note = ({ id, title, body, setCompany, company, setShowForm, }) => {
   };
 
   return (
-    <div>
-      <Button icon={editing ? 'cancel' : 'pencil'} onClick={() => setEditing(!editing)} />
-      <Button icon="trash" color="red" onClick={handleDelete} />
+    <Segment raised style={{ display: 'flex', justifyContent: 'space-between', width: '100%', }}>
       {
         editing ?
           <NoteForm
@@ -41,10 +39,19 @@ const Note = ({ id, title, body, setCompany, company, setShowForm, }) => {
         <div>
           { title && <h4>{ title }</h4> }
           <p>{ body }</p>
-          <hr />
         </div>
       }
-    </div>
+      <Dropdown
+        floating
+        pointing
+        icon={<Icon size="large" name="setting" color="grey" style={{ marginLeft: '20px', height: '25px' }} />}
+      >
+        <Dropdown.Menu>
+          <Dropdown.Item text="edit" onClick={() => setEditing(!editing)} />
+          <Dropdown.Item text="delete" onClick={handleDelete} />
+        </Dropdown.Menu>
+      </Dropdown>
+    </Segment>
   );
 };
 

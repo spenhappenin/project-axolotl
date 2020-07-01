@@ -43,7 +43,7 @@ const NoteForm = ({ company, setCompany, setShowForm, note, setEditing, }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ width: '100%', }}>
       <Form.Input
         name="title"
         label="Title"

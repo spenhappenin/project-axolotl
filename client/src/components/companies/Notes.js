@@ -12,16 +12,21 @@ const Notes = ({ company, notes, setCompany, }) => {
 
   return (
     <Segment>
-      <h2>Notes</h2>
-      <Button color="blue" onClick={() => setShowForm(!showForm)}>
-        { showForm ? 'Cancel' : 'Add Note' }
-      </Button>
-      <br />
-      <br />
+      <div style={{ display: 'flex', justifyContent: 'space-between', }}>
+        <h2>Notes</h2>
+        <Button color="blue" onClick={() => setShowForm(!showForm)}>
+          { showForm ? 'Cancel' : 'Add Note' }
+        </Button>
+      </div>
 
-      { showForm && <NoteForm company={company} setCompany={setCompany} setShowForm={setShowForm} /> }
+      { showForm &&
+        <NoteForm
+          company={company}
+          setCompany={setCompany}
+          setShowForm={setShowForm}
+        />
+      }
 
-      <br />
       <br />
       {
         notes && notes.map( note => (
