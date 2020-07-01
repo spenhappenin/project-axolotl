@@ -9,10 +9,13 @@
 #  industry    :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 class Company < ApplicationRecord
   # Associations
   belongs_to :user
+  # TODO: We dont really want to delete that data
+  has_many :applications, dependent: :destroy
   has_many :company_notes, dependent: :destroy
 
   def fetch_company_data

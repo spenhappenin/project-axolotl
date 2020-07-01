@@ -8,6 +8,7 @@
 #  email           :string
 #  password_digest :string
 #  avatar          :text
+#  admin           :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_164732) do
+ActiveRecord::Schema.define(version: 2020_07_01_180415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2020_06_27_164732) do
     t.index ["company_id"], name: "index_company_notes_on_company_id"
   end
 
+  create_table "job_applications", force: :cascade do |t|
+    t.datetime "date_submitted"
+    t.string "position"
+    t.integer "salary"
+    t.boolean "active", default: true
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_job_applications_on_company_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -48,4 +59,5 @@ ActiveRecord::Schema.define(version: 2020_06_27_164732) do
 
   add_foreign_key "companies", "users"
   add_foreign_key "company_notes", "companies"
+  add_foreign_key "job_applications", "companies"
 end
