@@ -11,7 +11,9 @@ const JobApplications = ({ applications, }) => {
     <Segment>
       <div style={{ display: 'flex', justifyContent: 'space-between', }}>
         <h2>Applications</h2>
-        <Button color="blue">New Application</Button>
+        <Link to={`/companies/${companyId}/applications/new`}>
+          <Button color="blue">New Application</Button>
+        </Link>
       </div>
       <br />
       {

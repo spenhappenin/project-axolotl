@@ -23,6 +23,11 @@ const Navbar = () => {
         {
           authenticated ?
             <>
+              <Link to="/applications">
+                <Menu.Item name="applications">
+                  Applications
+                </Menu.Item>
+              </Link>
               <Link to="/companies">
                 <Menu.Item name="companies">
                   Companies

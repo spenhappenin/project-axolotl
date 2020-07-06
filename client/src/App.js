@@ -8,7 +8,9 @@ const Companies = lazy(() => import('./components/companies/Companies'));
 const Company = lazy(() => import('./components/companies/Company'));
 const CompanyForm = lazy(() => import('./components/companies/CompanyForm'));
 const JobApplication = lazy(() => import('./components/companies/job_applications/JobApplication'));
-const Home = lazy(() => import('./components/Home'));
+const JobApplications = lazy(() => import('./components/job_applications/JobApplications'));
+const JobApplicationForm = lazy(() => import('./components/job_applications/JobApplicationForm'));
+const Dashboard = lazy(() => import('./components/root/Dashboard'));
 const Pricing = lazy(() => import('./components/Pricing'));
 const Login = lazy(() => import('./components/Login'));
 const Navbar = lazy(() => import('./components/shared/Navbar'));
@@ -31,7 +33,7 @@ const App = () => {
               <ProtectedRoute
                 exact
                 path="/"
-                component={Home}
+                component={Dashboard}
               />
               <Route
                 exact
@@ -65,8 +67,23 @@ const App = () => {
               />
               <ProtectedRoute
                 exact
+                path="/companies/:company_id/applications/new"
+                component={JobApplicationForm}
+              />
+              <ProtectedRoute
+                exact
                 path="/companies/:company_id/applications/:id"
                 component={JobApplication}
+              />
+              <ProtectedRoute
+                exact
+                path="/applications"
+                component={JobApplications}
+              />
+              <ProtectedRoute
+                exact
+                path="/applications/new"
+                component={JobApplicationForm}
               />
               <Route
                 path="*"

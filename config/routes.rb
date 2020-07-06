@@ -40,5 +40,8 @@ Rails.application.routes.draw do
       resources :company_notes, except: [:index, :show]
       resources :job_applications, except: :index
     end
+
+    resources :all_applications, only: :index
+
   end
 end
