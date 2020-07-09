@@ -12,8 +12,15 @@ user.companies.each_with_index do |company, i|
       date_submitted: i == 0 ? Date.today - (230..300).to_a.sample : Date.today - (1..30).to_a.sample,
       description: 'Some description about the application',
       salary: [60000, 75000, 80000, 90000].sample,
-      status: i == 0 ? 'declined' : 'pending',
-      company_id: company.id
+      status: i == 0 ? 'denied' : 'pending'
     )
   end
 end
+
+Company.find(1).job_applications.create(
+  position: 'Software Engineer',
+  date_submitted: Date.today,
+  description: 'Some description about the application',
+  salary: [60000, 75000, 80000, 90000].sample,
+  status: 'approved'
+)

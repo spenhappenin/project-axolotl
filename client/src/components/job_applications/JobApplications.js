@@ -1,26 +1,24 @@
 import React, { useEffect, useState, } from 'react';
 
 import { Link, } from 'react-router-dom';
-import { Button, Table, Icon, Input, } from 'semantic-ui-react';
+import { Button, Table, Icon, Input, Select, } from 'semantic-ui-react';
 
 import axios from '../../utils/webRequests';
 
 const JobApplications = (props) => {
   const [applications, setApplications] = useState([]);
-
-  // const [filteredApplications, setFilteredApplications] = useState([]);
   const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('pending');
 
   useEffect( () => {
-    axios.get('/api/all_applications')
+    axios.get(`/api/all_applications?status=${statusFilter}`)
       .then( res => {
         setApplications(res.data);
-        // setFilteredApplications(res.data);
       })
       .catch( err => {
         console.log(err);
       })
-  }, []);
+  }, [statusFilter]);
 
   const filteredApplications = applications.filter( app =>
     app.company_title.toLowerCase().includes(search.toLowerCase())
@@ -39,13 +37,19 @@ const JobApplications = (props) => {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <Input list='status' placeholder='Filter by status' />
-        <datalist id='status'>
+        <Select
+          name="statusFilter"
+          options={statusOptions}
+          placeholder="Filter by status"
+          value={statusFilter}
+          onChange={(e, { value, }) => setStatusFilter(value)}
+        />
+        {/* <datalist id='status'>
           <option value='pending' />
           <option value='declined' />
           <option value='approved' />
           <option value='all' />
-        </datalist>
+        </datalist> */}
       </div>
       <Table celled padded>
         <Table.Header>
@@ -75,5 +79,12 @@ const JobApplications = (props) => {
     </div>
   );
 };
+
+const statusOptions = [
+  { key: 'p', text: 'pending', value: 'pending', },
+  { key: 'a', text: 'approved', value: 'approved', },
+  { key: 'd', text: 'denied', value: 'denied', },
+  { key: 'all', text: 'all', value: 'all', },
+];
 
 export default JobApplications;

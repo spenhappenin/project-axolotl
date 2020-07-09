@@ -42,9 +42,9 @@ const statusColor = (status) => {
   switch(status) {
     case 'pending':
       return 'blue';
-    case 'accepted':
+    case 'approved':
       return 'green';
-    case 'declined':
+    case 'denied':
       return 'red';
     default:
       return 'grey';
