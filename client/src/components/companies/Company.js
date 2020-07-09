@@ -28,7 +28,7 @@ const Company = () => {
     <>
       <br />
       <br />
-      <img src={company.logo_url} alt={company.title} />
+      <img src={company.logo_url} alt={company.title} style={{ height: "100px", }} />
       <h1>{ company.title }</h1>
       <br />
       <p><b>{ company.industry }</b></p>

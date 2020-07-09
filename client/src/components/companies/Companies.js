@@ -34,6 +34,8 @@ const Companies = () => {
             <Item>
               <img
                 src={company.logo_url}
+                alt={company.title}
+                style={{ height: "100px", }}
               />
               <h3>{ company.title }</h3>
             </Item>

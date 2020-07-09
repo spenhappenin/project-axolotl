@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from 'react'
 
 import { Form, } from 'semantic-ui-react';
-import { useParams, } from 'react-router-dom';
+import { useHistory, useParams, } from 'react-router-dom';
 
 import axios from '../../utils/webRequests';
 
@@ -12,7 +12,10 @@ const JobApplicationForm = (props) => {
   const [position, setPosition] = useState('');
   const [salary, setSalary] = useState('');
   const [description, setDescription] = useState('');
+  const [newCompany, setNewCompany] = useState(false);
+  const [title, setTitle] = useState('');
   const { company_id, } = useParams();
+  const { push, } = useHistory();
 
   // if company_id is in the url params then set the current company
   useEffect( () => {
@@ -35,14 +38,66 @@ const JobApplicationForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (newCompany) {
+      axios.post(`/api/job_applications`, {
+        date_submitted: dateSubmitted,
+        position,
+        salary,
+        description,
+        title,
+      })
+        .then( res => {
+          push(`/companies/${res.data.company_id}`);
+        })
+        .catch( err => {
+          // TODO: Error Handling
+          console.log(err);
+        })
+    } else {
+      axios.post(`/api/companies/${companyId}/job_applications`, {
+        date_submitted: dateSubmitted,
+        position,
+        salary,
+        description
+      })
+        .then( res => {
+          push(`/companies/${res.data.company_id}`);
+        })
+        .catch( err => {
+          // TODO: Error Handling
+          console.log(err);
+        })
+    }
   };
+
+  const handleCheckbox = (e, data) => {
+    debugger
+  }
 
   return (
     <div>
       <h1>Job Application Form</h1>
       <Form onSubmit={handleSubmit}>
+        <Form.Checkbox
+          label="New Company"
+          name="newCompany"
+          checked={newCompany}
+          onChange={(e, { checked, }) => setNewCompany(checked)}
+        />
+        {
+          newCompany &&
+            <Form.Input
+              required
+              name="companyTitle"
+              placeholder="Company Title"
+              label="Company Title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+        }
         <Form.Group widths="equal">
           <Form.Dropdown
+            disabled={newCompany}
             fluid selection
             required
             options={companies}

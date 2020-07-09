@@ -29,4 +29,10 @@ class Company < ApplicationRecord
       applications: self.job_applications.order('created_at DESC')
     }
   end
+
+  def self.with_new_company(user, title)
+    company = user.companies.new(title: title)
+    return company if company.save
+  end
+
 end
