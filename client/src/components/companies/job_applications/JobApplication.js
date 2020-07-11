@@ -25,6 +25,8 @@ const JobApplication = () => {
     return (
       <div>
         <h1>{ jobApplication.company.title } - { jobApplication.position }</h1>
+        <p>{ jobApplication.status }</p>
+        <p>{ jobApplication.date_submitted }</p>
       </div>
     )
   } else {

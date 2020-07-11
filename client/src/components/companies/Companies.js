@@ -53,5 +53,4 @@ const Item = styled.div`
   margin-bottom: 25px;
 `;
 
-
 export default Companies;

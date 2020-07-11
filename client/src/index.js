@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { AuthProvider, } from "./providers/AuthProvider";
 import './index.css';
 import App from './App';
+import ScrollWrapper from './components/shared/ScrollWrapper';
 import { BrowserRouter as Router, } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <App />
+        <ScrollWrapper>
+          <App />
+        </ScrollWrapper>
       </AuthProvider>
     </Router>
   </React.StrictMode>,

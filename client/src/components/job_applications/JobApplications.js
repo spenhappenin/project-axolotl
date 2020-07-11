@@ -44,12 +44,6 @@ const JobApplications = (props) => {
           value={statusFilter}
           onChange={(e, { value, }) => setStatusFilter(value)}
         />
-        {/* <datalist id='status'>
-          <option value='pending' />
-          <option value='declined' />
-          <option value='approved' />
-          <option value='all' />
-        </datalist> */}
       </div>
       <Table celled padded>
         <Table.Header>
@@ -68,7 +62,9 @@ const JobApplications = (props) => {
             <Table.Row>
               <Table.Cell>{ app.status }</Table.Cell>
               <Table.Cell>{ app.company_title }</Table.Cell>
-              <Table.Cell>{ app.position }</Table.Cell>
+              <Table.Cell>
+                <Link to={`/companies/${app.company_id}/applications/${app.id}`}>{ app.position }</Link>
+              </Table.Cell>
               <Table.Cell>{ app.date_submitted }</Table.Cell>
               <Table.Cell>${ app.salary }</Table.Cell>
               <Table.Cell>{ app.description }</Table.Cell>

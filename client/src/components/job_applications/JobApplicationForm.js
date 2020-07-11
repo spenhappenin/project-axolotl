@@ -70,10 +70,6 @@ const JobApplicationForm = (props) => {
     }
   };
 
-  const handleCheckbox = (e, data) => {
-    debugger
-  }
-
   return (
     <div>
       <h1>Job Application Form</h1>
@@ -84,31 +80,32 @@ const JobApplicationForm = (props) => {
           checked={newCompany}
           onChange={(e, { checked, }) => setNewCompany(checked)}
         />
-        {
-          newCompany &&
-            <Form.Input
-              required
-              name="companyTitle"
-              placeholder="Company Title"
-              label="Company Title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-        }
         <Form.Group widths="equal">
-          <Form.Dropdown
-            disabled={newCompany}
-            fluid selection
-            required
-            options={companies}
-            name="companyId"
-            label="Company"
-            placeholder="Company"
-            value={companyId}
-            defaultValue={6}
-            type="text"
-            onChange={(e, { value, }) => setCompanyId(value)}
-          />
+          {
+            newCompany ?
+              <Form.Input
+                required
+                name="companyTitle"
+                placeholder="Company Title"
+                label="Company Title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+              />
+            :
+              <Form.Dropdown
+                disabled={newCompany}
+                fluid selection
+                required
+                options={companies}
+                name="companyId"
+                label="Company"
+                placeholder="Company"
+                value={companyId}
+                defaultValue={6}
+                type="text"
+                onChange={(e, { value, }) => setCompanyId(value)}
+              />
+          }
           <Form.Input
             required
             name="position"
