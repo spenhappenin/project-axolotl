@@ -19,7 +19,7 @@ user.companies.each_with_index do |company, i|
       ja.events.create(
         event_type: i == 0 ? 'interview' : 'challenge',
         sub_type: i == 0 ? 'phone' : 'technical',
-        scheduled_date: i == 0 ? (DateTime.now - (5..8).to_a.sample) : (DateTime.now - (1..3).to_a.sample),
+        scheduled_date: i == 0 ? DateTime.now - 5 : DateTime.now - 1,
         complete: i == 0 ? true : false
       )
     end

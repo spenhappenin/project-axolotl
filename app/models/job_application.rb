@@ -55,7 +55,7 @@ class JobApplication < ApplicationRecord
       status: self.status,
       salary: self.salary,
       company: Company.find(self.company_id),
-      events: self.events
+      events: self.events.order('created_at DESC')
     }
   end
 
