@@ -51,6 +51,7 @@ class JobApplication < ApplicationRecord
       date_submitted: self.date_submitted,
       description: self.description,
       status: self.status,
+      salary: self.salary,
       company: Company.find(self.company_id)
     }
   end
