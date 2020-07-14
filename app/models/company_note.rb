@@ -10,5 +10,8 @@
 #  updated_at :datetime         not null
 #
 class CompanyNote < ApplicationRecord
+
+  # Associations
   belongs_to :company
+
 end

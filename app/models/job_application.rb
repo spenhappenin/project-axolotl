@@ -12,11 +12,13 @@
 #  updated_at     :datetime         not null
 #
 class JobApplication < ApplicationRecord
+
   # Validations
   validates :status, inclusion: { in: %w(pending approved denied), message: 'Not a correct status.' }
 
   # Associations
   belongs_to :company
+  has_many :events
 
   def self.all_applications(user, status)
     if status == 'all'
@@ -52,7 +54,8 @@ class JobApplication < ApplicationRecord
       description: self.description,
       status: self.status,
       salary: self.salary,
-      company: Company.find(self.company_id)
+      company: Company.find(self.company_id),
+      events: self.events
     }
   end
 

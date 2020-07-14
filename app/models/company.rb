@@ -12,6 +12,7 @@
 #  user_id     :bigint           not null
 #
 class Company < ApplicationRecord
+
   # Associations
   belongs_to :user
   # TODO: We dont really want to delete that data

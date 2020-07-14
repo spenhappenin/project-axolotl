@@ -29,6 +29,8 @@ const JobApplication = () => {
         <p>{ jobApplication.date_submitted }</p>
         <p>{ jobApplication.salary }</p>
         <p>{ jobApplication.description }</p>
+        <br />
+
       </div>
     )
   } else {

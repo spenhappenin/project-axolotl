@@ -41,7 +41,9 @@ Rails.application.routes.draw do
       resources :job_applications, except: :index
     end
 
-    resources :job_applications, only: :create
+    resources :job_applications, only: :create do
+      # resources :events
+    end
 
     resources :all_applications, only: :index
 
