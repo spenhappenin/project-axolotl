@@ -20,7 +20,7 @@ user.companies.each_with_index do |company, i|
         event_type: i == 0 ? 'interview' : 'challenge',
         sub_type: i == 0 ? 'phone' : 'technical',
         scheduled_date: i == 0 ? DateTime.now - 5 : DateTime.now - 1,
-        complete: i == 0 ? true : false
+        complete: i == 0 ? true : false || ja.status == 'denied' ? true : false
       )
     end
   end

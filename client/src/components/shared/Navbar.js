@@ -14,9 +14,10 @@ const Navbar = () => {
   return (
     <Menu>
       <Link to="/">
-        <Menu.Item name="home">
-          LOGO
-        </Menu.Item>
+        <LogoTab name="home">
+          <Logo src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSAzf6Vt-WUzEecYB8KJptY8ntVIqp17mu4pg&usqp=CAU" />
+          IGNITE
+        </LogoTab>
       </Link>
 
       <Menu.Menu position="right">
@@ -56,5 +57,12 @@ const Navbar = () => {
     </Menu>
   );
 };
+
+const LogoTab = styled(Menu.Item)`
+`;
+
+const Logo = styled.img`
+  width: 300px;
+`;
 
 export default Navbar;

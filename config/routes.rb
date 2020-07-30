@@ -42,8 +42,12 @@ Rails.application.routes.draw do
     end
 
     resources :job_applications, only: :create do
-      # resources :events
+      resources :events, only: :create
     end
+
+    # Upcoming Events
+    get 'upcoming_events', to: 'events#upcoming_events'
+
 
     resources :all_applications, only: :index
 

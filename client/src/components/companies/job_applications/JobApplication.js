@@ -6,10 +6,12 @@ import { useParams, } from 'react-router-dom';
 import { Button, Icon, Segment, } from 'semantic-ui-react';
 
 import axios from '../../../utils/webRequests';
+import EventForm from './EventForm';
 
 const JobApplication = () => {
   const [jobApplication, setJobApplication] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const { company_id, id, } = useParams();
 
   useEffect( () => {
@@ -36,8 +38,22 @@ const JobApplication = () => {
         <Segment>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>Application Events</h3>
-            <Button color="blue">Add Event</Button>
+            <Button
+              color="blue"
+              onClick={() => setShowForm(!showForm)}
+            >
+              { showForm ? 'Cancel Event' : 'Add Event' }
+            </Button>
           </div>
+
+          { showForm &&
+            <EventForm
+              jobApplication={jobApplication}
+              setJobApplication={setJobApplication}
+              setShowForm={setShowForm}
+            />
+          }
+
           {
             jobApplication.events.map( event => (
               <Segment key={event.id}>
@@ -48,11 +64,11 @@ const JobApplication = () => {
                 <div style={{ display: 'flex' }}>
                   <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
                     <Icon name="calendar alternate outline" size="big" />
-                    <Text>{ moment(event.scheduled_time).format('ddd, ll') }</Text>
+                    <Text>{ moment(event.scheduled_date).format('ddd, ll') }</Text>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Icon name="clock outline" size="big" />
-                    <Text>{ moment(event.scheduled_time).format('LT') }</Text>
+                    <Text>{ moment(event.scheduled_date).format('LT') }</Text>
                   </div>
                 </div>
                 <br />
