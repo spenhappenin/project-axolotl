@@ -11,6 +11,12 @@ class Api::EventsController < ApiController
     end
   end
 
+  def update
+    event = Event.find(params[:id])
+    event.update(complete: !event.complete)
+    render json: event
+  end
+
   def upcoming_events
     render json: Event.upcoming_events(current_user)
   end

@@ -1,6 +1,6 @@
 class Api::JobApplicationsController < ApiController
   before_action :set_company
-  before_action :set_job_application, only: :show
+  before_action :set_job_application, only: [:show, :update]
 
   def show
     render json: @job_application.render_app_data
@@ -12,6 +12,14 @@ class Api::JobApplicationsController < ApiController
       render json: job_application
     else
       render_error(job_application)
+    end
+  end
+
+  def update
+    if @job_application.update(job_application_params)
+      render json: @job_application.render_app_data
+    else
+      render_error(@job_application)
     end
   end
 
@@ -28,7 +36,7 @@ class Api::JobApplicationsController < ApiController
     end
 
     def job_application_params
-      params.require(:job_application).permit(:position, :date_submitted, :description, :salary)
+      params.require(:job_application).permit(:position, :date_submitted, :description, :salary, :status)
     end
 
 end

@@ -41,8 +41,8 @@ Rails.application.routes.draw do
       resources :job_applications, except: :index
     end
 
-    resources :job_applications, only: :create do
-      resources :events, only: :create
+    resources :job_applications, only: [:create, :update] do
+      resources :events, only: [:create, :update]
     end
 
     # Upcoming Events
